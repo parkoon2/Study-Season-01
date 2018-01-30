@@ -18,7 +18,9 @@ npm install -g express-generator 다음과 같은 명령어로 설치하게되�
 node.js 가 설치된 곳으로 가서 명령어를 입력해야 됬었다. 환경변수도 되있었는데..
 
 - Node.js 에서 HTTPS 서버 구축하기
+
 참고 블로그 : http://cinema4dr12.tistory.com/984
+
 여기에 내용이 아주 잘 나와있음. 간단히 요약하면
 1.	openSSL을 다운받는다.
 2.	openSSL명령어를 통해 개인키와 공개키를 생성한다.
