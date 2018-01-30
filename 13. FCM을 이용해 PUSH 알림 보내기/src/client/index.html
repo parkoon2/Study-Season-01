@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Hello World</title>
+    <style>
+    body { padding-top: 50px; padding-bottom: 50px; }
+    .btn { margin-bottom: 10px; }
+    </style>
+</head>
+ 
+<body>
+    <div class="container">
+        <button class="btn btn-primary btn-block" id="fcm-code">Get FCM Code</button>
+        <div class='alert alert-info'></div>
+    </div>
+    <!-- jQuery script 참조 -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <!-- Bootstrap 참조 -->
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- cordova script 참조 -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript">
+    /** jQuery 초기화 */
+    $(function() {
+        // 버튼 이벤트 정의
+        $("#fcm-code").click(function() {
+            FCMPlugin.getToken(function(token){
+                $(".alert-info").html(token);
+            });
+        });
+ 
+        // 장치 초기화가 완료된 직후 실행됨
+        $(document).on('deviceready', function() {
+            // Push 메시지가 수신된 경우 호출될 이벤트 등록
+            FCMPlugin.onNotification(function(data){
+                $(".alert-info").html(JSON.stringify(data));
+            });
+        });
+    }); // end jquery
+    </script>
+</body>
+ 
+</html>
