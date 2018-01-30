@@ -45,10 +45,12 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+/* 이부분이 key의 암호화 복호화 작업 부분이다. */
 const options = {
 	key: fs.readFileSync('./keys/server-key.pem'),
 	cert: fs.readFileSync('./keys/server-cert.pem')
 };
+
 https.createServer(options, app).listen(3005, function() {
   console.log("HTTPS server listening on port " + 3005);
 });
