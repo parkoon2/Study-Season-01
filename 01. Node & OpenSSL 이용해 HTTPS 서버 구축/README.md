@@ -13,4 +13,6 @@ SSL -> Secure Socket Layer 로 웹브라우저와 웹서버간에 데이터를 �
 Node.js 에서 Https 서버 구축
 참고 : http://cinema4dr12.tistory.com/984 , http://zero-gravity.tistory.com/239 , https://blog.naver.com/awesomedev/220713833207
 
-개인키와 인증서 생성
+1. openssl 프로그램 다운로드
+2. 개인키와 인증서 생성
+3. app.js 코드 작성 (앞에 생성한 2개의 키를 이용)
