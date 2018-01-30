@@ -19,8 +19,8 @@ Node.js 에서 Https 서버 구축
 
 1. openssl 프로그램 다운로드
 2. 개인키와 인증서 생성
-  genrsa -out key.pem 2048   ->  개인키 생성
-  req -new -key key.pem -out req.csr -config openssl.cnf   ->  인증서 발급요청
-  **이 명령어를 치기전에 주의 할 점은 openssl.cnf 라는 파일을 bin 폴더 안, 그러니깐 openssl 프로그램과 같은 디렉토리에 있어야 함.
-  x509 -req -in req.csr -signkey key.pem -out cert.pem -days 365    -> cert.pem 이라는 인증서 생성
+  genrsa -out key.pem 2048   ->  개인키 생성                 
+  req -new -key key.pem -out req.csr -config openssl.cnf   ->  인증서 발급요청                 
+  **이 명령어를 치기전에 주의 할 점은 openssl.cnf 라는 파일을 bin 폴더 안, 그러니깐 openssl 프로그램과 같은 디렉토리에 있어야 함.            
+  x509 -req -in req.csr -signkey key.pem -out cert.pem -days 365    -> cert.pem 이라는 인증서 생성                 
 3. app.js 코드 작성 (앞에 생성한 2개의 키를 이용)
