@@ -1,0 +1,32 @@
+{
+  "background": {
+      "scripts": [
+          "background/desktopCapture.js"
+        ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*", "https://*/*"
+        //"http://localhost"
+      ],
+      "js": [
+        "content_scripts/signal.js"
+      ]
+    }
+  ],
+
+  "manifest_version": 2,
+  "name": "Screen Share App",
+  "version": "1.0.0",
+  "browser_action": {
+    "default_icon": "images/icon64.png"
+  },
+
+  "description": "A plain text description",
+  "icons": {
+      "16": "images/icon16.png",
+      "48": "images/icon64.png",
+      "128": "images/icon128.png"
+  }
+}

@@ -1,2 +1,3 @@
-Chrome Extension을 이용해 화면공유 개발
-[이하 내용정리...]
+## 1. Chrome Extension 알기
+
+## 2. SDP / Candidate 교환

@@ -1,0 +1,27 @@
+<body>
+    <button id="get"> GET </button>
+    <button id="post"> POST </button>
+    <button id="delete"> DELETE </button>
+    <button id="put"> PUT </button>
+    
+    <script src="../js/handler.js"></script>
+    <script>
+        
+        const getButton = document.getElementById( 'get' );
+        const postButton = document.getElementById( 'post' );
+        const deleteButton = document.getElementById( 'delete' );
+        const putButton = document.getElementById( 'put' );
+
+        const url = 'http://localhost:7777/api/users'
+
+        getButton.addEventListener( 'click', Handler.getRequest );
+        postButton.addEventListener( 'click', Handler.postRequest );
+        deleteButton.addEventListener( 'click', Handler.deleteRequest );
+        putButton.addEventListener( 'click', Handler.putRequest );
+
+        
+
+    </script>
+
+
+</body>
