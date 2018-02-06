@@ -2,3 +2,5 @@ socket.io는 WebSocket을 사용해서 클라이언트에 실시간으로 데이
 WebSocket 은 서버의 데이터를 클라이언트에 즉시 전달할 수 있는 실시간 애플리케이션 작성에 매우 효과적인 프로토콜이다.
 
 한 클라이언트에서 소켓을 통해 서버로 데이터를 보내고 서버는 그 데이터를 받아 모든 클라이언트에게 다시 보냄 -> 동시에 모든 클라이언트가 같은 데이터를 전송받을 수 있게된다.
+http://bcho.tistory.com/896
+http://poiemaweb.com/nodejs-socketio
