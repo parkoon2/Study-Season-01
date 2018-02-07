@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<title>Group Chat</title>
+		 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link rel = "stylesheet" type = "text/css" href = "/css/style.css">
+    	<script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    	<script type ="text/javascript">
+        $(document).ready(function() {
+            const name = prompt("What is your name?");
+            console.log("name",name);
+            if(name.length > 1) {
+                $('#chat').css('visibility','visible');
+                $('#text').css('visibility','visible');
+                var socket = io.connect();
+                socket.emit('user_connected', {name: name});
+            };
+            $('button').click(function() {
+               var message =  $("#message").val();
+               socket.emit('message_sent', {message: message});
+               $('#message').val('');
+            });
+            $("#texting").keyup(function(event) {
+                if (event.which == 13) {
+                    console.log("aaa");
+                    socket.emit('message_sent',{msg:$('#msgbox').val()});
+                    $('#msgbox').val('');
+                }
+            });
+
+            socket.on('message_added', function(data){
+                $('#inner_chat').append("<p>" +data.name + ": " +data.message + " </p>");
+            });
+        });
+        </script>
+	</head>
+	<body>
+        <div id = "chat">
+            <div id = "inner_chat">
+            <% for (var message in messages) { %>
+                <p><%= messages[message].name %> : <%= messages[message].message %></p>
+            <% } %>
+            </div>
+        </div>
+        <div id = "texting">
+            <form action = '/text' method = 'post'>
+               <textarea id = 'message' name = 'message'></textarea>
+               <button>Send</button>
+            </form>
+        </div>
+	</body>
+</html>

@@ -1,23 +1,43 @@
-const express = require( 'express' );
-const http = require( 'http' );
+const express = require( "express" );
+const bodyParser = require( "body-parser" );
+const path = require( "path" );
 const app = express();
 
-app.get( '/', function ( req, res ) {
-  res.sendFile( __dirname + '/index.html' );
+app.use(express.static(path.join(__dirname, "./public")));
+
+app.use(bodyParser.urlencoded());
+
+
+const messages = [];
+
+app.set('views', path.join( __dirname, './views'));
+app.set('view engine', 'ejs');
+
+app.get('/', function(req, res) {
+ res.render("index", { messages: messages });
 });
 
-const httpServer = http.createServer( app ).listen( 3000, function( req,res ) {
-  console.log( 'Socket IO server has been started' );
+app.post('/text', function(req,res) {
+	console.log('hello', req.body.message);
+	res.redirect('/');
 });
 
-const io = require( 'socket.io' ).listen(httpServer);
- 
-io.sockets.on( 'connection', function( socket ) {
-   socket.emit( 'toclient', { msg : 'Welcome !' } );
-   socket.on( 'fromclient', function( data ) {
-       socket.broadcast.emit( 'toclient', data ); // 자신을 제외하고 다른 클라이언트에게 보냄
-       socket.emit( 'toclient', data ); // 해당 클라이언트에게만 보냄. 다른 클라이언트에 보낼려면?
-       console.log( 'Message from client :' + data.msg );
-   })
+const server = app.listen(8000, function() {
+	console.log("listening on port 8000");
 });
 
+const io = require('socket.io').listen(server);
+
+io.sockets.on('connection', function(socket) {
+	let user_name;
+	
+	socket.on('user_connected', function(data) {
+		user_name = data.name;
+	});
+	
+	socket.on('message_sent', function(data){
+		messages.push({name: user_name, message: data.message});
+		console.log(messages);
+		io.emit('message_added',{name: user_name, message: data.message });
+	});	
+});
