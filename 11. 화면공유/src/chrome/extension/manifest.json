@@ -1,7 +1,8 @@
 {
   "background": {
       "scripts": [
-          "background/desktopCapture.js"
+          "background/background.desktopCapture.js",
+          "background/background.signal.js"
         ]
   },
   "content_scripts": [
@@ -11,7 +12,7 @@
         //"http://localhost"
       ],
       "js": [
-        "content_scripts/signal.js"
+        "content_scripts/content.signal.js"
       ]
     }
   ],
@@ -22,7 +23,9 @@
   "browser_action": {
     "default_icon": "images/icon64.png"
   },
-
+  "permissions": [
+    "desktopCapture"
+  ],
   "description": "A plain text description",
   "icons": {
       "16": "images/icon16.png",
