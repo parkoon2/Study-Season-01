@@ -13,7 +13,11 @@
     }
 
     function captureDoneHandler( e ) {
-        console.log('e', e)
+        let streamId = e.detail.result;
+        webrtc.getMedia( streamId, function() {
+            
+        });
+        //console.log('stream', stream)
         // 이제 이 아이디값을 가지고 화면을 공유하면 되는데....
     }
 
