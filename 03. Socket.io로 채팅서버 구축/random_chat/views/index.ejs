@@ -23,7 +23,7 @@
                 
                 let message = $message.val();
                 socket.emit( 'message_sent', { message : message } );
-                $message.val('');
+                $message.val('');//
             });
             /*$message.keyup( function(e) {
                 if ( e.which == 13 ) {
