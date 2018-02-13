@@ -34,3 +34,41 @@
 
    예제를 살펴보니... 경로에 public이 없다. 정적 디렉토리로 등록해준 public은 빼주는것이다..
    ---
+
+# MediaStream APIs
+https://www.tutorialspoint.com/webrtc/webrtc_media_stream_apis.htm
+
+  Tip!
+   `!!` 를 이용해 true로 강제 변환할 수 있다.
+
+        // 화상화면 공유
+        let constraints = {
+             video: true,
+             audio: true
+        }
+
+        // PC화면 공유
+        let constraints = {
+
+            audio: false,
+            video: {
+                mandatory: {
+                    chromeMediaSourceId: streamId,
+                    chromeMediaSource: 'desktop',
+                    maxWidth: window.screen.width,
+                    maxHeight: window.screen.height
+                    //...
+              }
+            }
+        }
+
+# Create Peer
+ webkitRTCPeerConnection 을 이용해 peer를 생성
+ 파라미터로 iceServers 전달...
+ 현재는 구글에서 제공해주는 것으로!
+ const configuration = { 
+   "iceServers": [{ "url": "stun:stun.1.google.com:19302" }] 
+ }; 
+
+
+onicecandidate 는 언제 호출되냐...
