@@ -6,7 +6,7 @@
     	<script type ="text/javascript" src="/socket.io/socket.io.js"></script>
     	<script type ="text/javascript">
         $(document).ready(function() {
-            const name = prompt( "What is your name?" );
+            let name = prompt( "What is your name?" );
             console.log( "name", name );
             if( name.length > 0 ) {
                 const $chat = $( '#chat' );
@@ -19,7 +19,7 @@
             const $button = $( 'button' );
             const $message = $( "#message" );
             $button.click( function() {
-                console.log("button click ok");
+                console.log( "button click ok", message );
                 
                 let message = $message.val();
                 socket.emit( 'message_sent', { message : message } );
@@ -35,6 +35,8 @@
             });*/
 			const $inner_chat = $('#inner_chat');
             socket.on( 'message_added', function(data) {
+            	console.log("data.name",data.name);
+            	console.log("data.message",data.message);
                 $inner_chat.append("<p>" +data.name + ": " +data.message + " </p>");
             });
         });
