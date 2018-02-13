@@ -6,28 +6,35 @@
     	<script type ="text/javascript" src="/socket.io/socket.io.js"></script>
     	<script type ="text/javascript">
         $(document).ready(function() {
-            const name = prompt("What is your name?");
-            console.log("name",name);
-            if(name.length > 1) {
-                $('#chat').css('visibility','visible');
-                $('#text').css('visibility','visible');
-                var socket = io.connect();
-                socket.emit('user_connected', {name: name});
+            const name = prompt( "What is your name?" );
+            console.log( "name", name );
+            if( name.length > 1 ) {
+                const $chat = $( '#chat' );
+                const $text = $( '#text' );
+                $chat.css( 'visibility', 'visible' );
+                $text.css( 'visibility' , 'visible' );
+                let socket = io.connect();
+                socket.emit( 'user_connected', { name : name } );
             };
-            $('button').click(function() {
-               var message =  $("#message").val();
-               socket.emit('message_sent', {message: message});
-               $('#message').val('');
+            const $button = $( 'button' );
+            const $message = $( "#message" );
+            $button.click( function() {
+                console.log("button click ok");
+                
+                let message = $message.val();
+                socket.emit( 'message_sent', { message : message } );
+                $message.val('');
             });
-            $("#texting").keyup(function(event) {
-                if (event.which == 13) {
-                    console.log("aaa");
-                    socket.emit('message_sent',{msg:$('#msgbox').val()});
-                    $('#msgbox').val('');
+            $message.keyup( function(e) {
+                if ( e.which == 13 ) {
+                    console.log( "enter ok" );
+                    let message = $message.val();
+                    socket.emit( 'message_sent', { message : message } );
+                    $message.val('');
                 }
             });
 
-            socket.on('message_added', function(data){
+            socket.on( 'message_added', function(data) {
                 $('#inner_chat').append("<p>" +data.name + ": " +data.message + " </p>");
             });
         });
@@ -36,7 +43,7 @@
 	<body>
         <div id = "chat">
             <div id = "inner_chat">
-            <% for (var message in messages) { %>
+            <% for (let message in messages) { %>
                 <p><%= messages[message].name %> : <%= messages[message].message %></p>
             <% } %>
             </div>
