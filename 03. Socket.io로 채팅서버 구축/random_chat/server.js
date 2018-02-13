@@ -26,11 +26,11 @@ app.post( '/text', function(req, res) {
 	res.redirect( '/' );
 });
 
-const server = app.listen( 8000, function() {
-	console.log( "listening on port 8000" );
+const server = app.listen( 3000, function() {
+	console.log( "listening on port 3000" );
 });
 
-const io = require('socket.io').listen(server);
+let io = require( 'socket.io' ).listen(server);
 
 io.sockets.on( 'connection', function(socket) {
 	let user_name;
@@ -41,7 +41,7 @@ io.sockets.on( 'connection', function(socket) {
 	
 	socket.on( 'message_sent', function(data) {
 		messages.push( {name: user_name, message: data.message} );
-		console.log( messages );
+		console.log( "data", data );
 		io.emit( 'message_added', {name: user_name, message: data.message} );
 	});	
 });

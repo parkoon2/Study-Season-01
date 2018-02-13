@@ -8,7 +8,7 @@
         $(document).ready(function() {
             const name = prompt( "What is your name?" );
             console.log( "name", name );
-            if( name.length > 1 ) {
+            if( name.length > 0 ) {
                 const $chat = $( '#chat' );
                 const $text = $( '#text' );
                 $chat.css( 'visibility', 'visible' );
@@ -25,17 +25,17 @@
                 socket.emit( 'message_sent', { message : message } );
                 $message.val('');
             });
-            $message.keyup( function(e) {
+            /*$message.keyup( function(e) {
                 if ( e.which == 13 ) {
                     console.log( "enter ok" );
                     let message = $message.val();
                     socket.emit( 'message_sent', { message : message } );
                     $message.val('');
                 }
-            });
-
+            });*/
+			const $inner_chat = $('#inner_chat');
             socket.on( 'message_added', function(data) {
-                $('#inner_chat').append("<p>" +data.name + ": " +data.message + " </p>");
+                $inner_chat.append("<p>" +data.name + ": " +data.message + " </p>");
             });
         });
         </script>
@@ -43,7 +43,7 @@
 	<body>
         <div id = "chat">
             <div id = "inner_chat">
-            <% for (let message in messages) { %>
+            <% for ( let message in messages ) { %>
                 <p><%= messages[message].name %> : <%= messages[message].message %></p>
             <% } %>
             </div>
