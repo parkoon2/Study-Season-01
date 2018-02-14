@@ -10,6 +10,7 @@ app.use( express.static( path.join( __dirname, "./public" ) ) );
 app.use( bodyParser.urlencoded() );
 
 let messages = [];
+let user_name;
 /** view 파일들이 있는 경로를 설정하는 영역 */
 app.set( 'views', path.join( __dirname, './views' ) );
 /** 템플릿 엔진 종류 셋팅 */
@@ -33,7 +34,7 @@ const server = app.listen( 3000, function() {
 const io = require( 'socket.io' ).listen(server);
 
 io.sockets.on( 'connection', function(socket) {
-	let user_name;
+	
 	
 	socket.on( 'user_connected', function(data) {
 		user_name = data.name;
