@@ -12,38 +12,38 @@ app.use( bodyParser.urlencoded() );
 let messages = [];
 let user_name;
 /** view 파일들이 있는 경로를 설정하는 영역 */
-app.set( 'views', path.join( __dirname, './views' ) );
+app.set( "views", path.join( __dirname, "./views" ) );
 /** 템플릿 엔진 종류 셋팅 */
-app.set( 'view engine', 'ejs' );
+app.set( "view engine", "ejs" );
 
-app.get( '/', function(req, res) {
+app.get( "/", function(req, res) {
  res.render( "index", {messages: messages} );
 });
 /** /test 로 post 요청이 들어오게 되면 req.body 객체를 웹페이지에 뿌려주는데 이 경우 bodyParser.urlencoded() 가
  * 매칭된 req.body 객체를 생성하여 연결해줌
  */
-app.post( '/text', function(req, res) { 
-	console.log( 'hello', req.body.message );
-	res.redirect( '/' );
+app.post( "/text", function(req, res) { 
+	console.log( "hello", req.body.message );
+	//res.redirect( "/" );
 });
 
 const server = app.listen( 3000, function() {
 	console.log( "listening on port 3000" );
 });
 
-const io = require( 'socket.io' ).listen(server);
+const io = require( "socket.io" ).listen(server);
 
-io.sockets.on( 'connection', function(socket) {
+io.sockets.on( "connection", function(socket) {
 	
 	
-	socket.on( 'user_connected', function(data) {
+	socket.on( "user_connected", function(data) {
 		user_name = data.name;
 		
 	});
 	
-	socket.on( 'message_sent', function(data) {
+	socket.on( "message_sent", function(data) {
 		messages.push( {name: user_name, message: data.message} );
 		console.log( "data", data );
-		io.emit( 'message_added', {name: user_name, message: data.message} );
+		io.emit( "message_added", {name: user_name, message: data.message} );
 	});	
 });
