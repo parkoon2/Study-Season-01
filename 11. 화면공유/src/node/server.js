@@ -43,10 +43,9 @@ io.sockets.on( 'connection', function( socket ) {
         console.log( '!!!', message )
 
         if ( message.cmd === 'offer' ) {
-            console.log('!')
             socket.broadcast.emit( 'webrtc', JSON.stringify(message) );
         } else if ( message.cmd === 'answer' ) {
-            console.log('zzzzzzzzzzzzzzzz')
+            socket.broadcast.emit( 'webrtc', JSON.stringify(message) );
         }
     })
 

@@ -22,7 +22,9 @@
         message = JSON.parse( message );
 
         if ( message.cmd === 'offer' ) {
-            onOffer( message.data )
+            onOffer( message.data );
+        } else if ( message.cmd === 'answer' ) {
+            onAnswer( message.data );
         }
     })
 
@@ -97,6 +99,11 @@
         }, function( error ) {
             throw new Error( error );
         })
+    }
+
+    function onAnswer( answerSdp ) {
+        console.log( 'In onAnswer', answerSdp );
+        peer.setRemoteDescription( new RTCSessionDescription(answerSdp) );
     }
 
     function sendMessage( message ) {
