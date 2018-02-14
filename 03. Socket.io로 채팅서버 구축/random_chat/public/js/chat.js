@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	const socket = io.connect();
-	let name = prompt( "What is your name?" );
+	const name = prompt( "What is your name?" );
 	console.log( "name", name );
 	const $chat = $( '#chat' );
 	const $text = $( '#text' );
@@ -16,15 +16,17 @@ $(document).ready(function() {
 		console.log( "button click ok", message );
 		socket.emit( 'message_sent', { message : message } );
 		$message.val('');
+		return false;
 	});
-	/*$message.keyup( function(e) {
-	if ( e.which == 13 ) {
-	console.log( "enter ok" );
-	let message = $message.val();
-	socket.emit( 'message_sent', { message : message } );
-	$message.val('');
-	}
-	});*/
+	$message.keyup( function(e) {
+		if ( e.which == 13 ) {
+			console.log( "enter ok" );
+			let message = $message.val();
+			socket.emit( 'message_sent', { message : message } );
+			$message.val('');
+			return false;
+		}
+	});
 	const $inner_chat = $('#inner_chat');
 	socket.on( 'message_added', function(data) {
 		console.log("data.name",data.name);
