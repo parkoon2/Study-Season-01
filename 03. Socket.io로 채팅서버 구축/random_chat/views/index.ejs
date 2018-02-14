@@ -1,46 +1,11 @@
+<!doctype html>
 <html>
 	<head>
-		<title>Group Chat</title>
+		<title>Chat</title>
 		 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <link rel = "stylesheet" type = "text/css" href = "/css/style.css">
     	<script type ="text/javascript" src="/socket.io/socket.io.js"></script>
-    	<script type ="text/javascript">
-        $(document).ready(function() {
-            let name = prompt( "What is your name?" );
-            console.log( "name", name );
-            if( name.length > 0 ) {
-                const $chat = $( '#chat' );
-                const $text = $( '#text' );
-                $chat.css( 'visibility', 'visible' );
-                $text.css( 'visibility' , 'visible' );
-                let socket = io.connect();
-                socket.emit( 'user_connected', { name : name } );
-            };
-            const $button = $( 'button' );
-            const $message = $( "#message" );
-            $button.click( function() {
-                console.log( "button click ok", message );
-                
-                let message = $message.val();
-                socket.emit( 'message_sent', { message : message } );
-                $message.val('');
-            });
-            /*$message.keyup( function(e) {
-                if ( e.which == 13 ) {
-                    console.log( "enter ok" );
-                    let message = $message.val();
-                    socket.emit( 'message_sent', { message : message } );
-                    $message.val('');
-                }
-            });*/
-			const $inner_chat = $('#inner_chat');
-            socket.on( 'message_added', function(data) {
-            	console.log("data.name",data.name);
-            	console.log("data.message",data.message);
-                $inner_chat.append("<p>" +data.name + ": " +data.message + " </p>");
-            });
-        });
-        </script>
+    	<script src="/js/chat.js"></script>
 	</head>
 	<body>
         <div id = "chat">
@@ -51,7 +16,7 @@
             </div>
         </div>
         <div id = "texting">
-            <form action = '/text' method = 'post'>
+            <form id = "form" action = '/text' method = 'post'>
                <textarea id = 'message' name = 'message'></textarea>
                <button>Send</button>
             </form>

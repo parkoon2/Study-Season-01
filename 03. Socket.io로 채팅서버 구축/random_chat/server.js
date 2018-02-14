@@ -9,7 +9,7 @@ app.use( express.static( path.join( __dirname, "./public" ) ) );
 /** body-parser를 사용해 application/x-www-form-urlencoded 파싱 -> form태그의 기본 인코딩 타입 */
 app.use( bodyParser.urlencoded() );
 
-const messages = [];
+let messages = [];
 /** view 파일들이 있는 경로를 설정하는 영역 */
 app.set( 'views', path.join( __dirname, './views' ) );
 /** 템플릿 엔진 종류 셋팅 */
@@ -30,13 +30,14 @@ const server = app.listen( 3000, function() {
 	console.log( "listening on port 3000" );
 });
 
-let io = require( 'socket.io' ).listen(server);
+const io = require( 'socket.io' ).listen(server);
 
 io.sockets.on( 'connection', function(socket) {
 	let user_name;
 	
 	socket.on( 'user_connected', function(data) {
 		user_name = data.name;
+		
 	});
 	
 	socket.on( 'message_sent', function(data) {
