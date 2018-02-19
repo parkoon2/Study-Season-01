@@ -35,10 +35,8 @@ const io = require( "socket.io" ).listen(server);
 
 io.sockets.on( "connection", function(socket) {
 	
-	
 	socket.on( "user_connected", function(data) {
 		user_name = data.name;
-		
 	});
 	
 	socket.on( "message_sent", function(data) {

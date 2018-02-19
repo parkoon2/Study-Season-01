@@ -23,4 +23,14 @@ Node.js 에서 Https 서버 구축
   req -new -key key.pem -out req.csr -config openssl.cnf   ->  인증서 발급요청                 
   **이 명령어를 치기전에 주의 할 점은 openssl.cnf 라는 파일을 bin 폴더 안, 그러니깐 openssl 프로그램과 같은 디렉토리에 있어야 함.            
   x509 -req -in req.csr -signkey key.pem -out cert.pem -days 365    -> cert.pem 이라는 인증서 생성                 
-3. app.js 코드 작성 (앞에 생성한 2개의 키를 이용)
+3. app.js 코드 작성 (앞에 생성한 2개의 키를 이용) 
+
+===============================================================================================================
+express 폴더   
+
+express 설치 
+npm install -g express-generator    : -g 로 글로벌하게 설치하지 않으면 'express 프로젝트명' 이 명령어로 프로젝트 생성 불가함, 이유는 아직모름
+express 프로젝트명                                                   : express 프로젝트 폴더 생성 
+npm install                         : express 에 필요한 모듈 다운 -> 모듈 목록은 package.json 에 명시되어 있음 
+npm start                           : 실행
+
