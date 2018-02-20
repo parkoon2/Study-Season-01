@@ -8,25 +8,25 @@ const socketio = require('socket.io');
 const mongoose = require('mongoose');
 
 // MongoDB 접속
-mongoose.connect('mongodb://localhost/stoneIS');
+mongoose.connect('mongodb://localhost/12701');
 
 // 모델 정의 (Schema 명칭)
-var Schema = mongoose.Schema, ObjectId = Schema.ObjectId;
-var chatLogSchema = new Schema({
+let Schema = mongoose.Schema, ObjectId = Schema.ObjectId;
+let chatLogSchema = new Schema({
 	id: ObjectId,
 	log: String,
 	date: String
 });
 
 // 컬렉션 생성
-var ChatLogModel = mongoose.model('chatLog', chatLogSchema);
+let ChatLogModel = mongoose.model('chatLog', chatLogSchema);
 
 // EXPRESS, HTTP, SOCKET.IO 객체
-var app = express();
+const app = express();
 var server = null;
 var io = null;
 // 채팅방 참여 유저
-var users = [];
+let users = [];
 
 // REDIS (발행자, 구독자)
 var subscriber = redis.createClient();

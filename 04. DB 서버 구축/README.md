@@ -9,9 +9,18 @@ npm install mongoose
 http://jdm.kr/blog/21                                                                                
 http://mongoosejs.com/docs/index.html                                      
 http://twowix.me/45                                                                                               
-http://inma.tistory.com/61                                            
-https://javafa.gitbooks.io/nodejs_server_basic/content/chapter13.html                                             
+http://inma.tistory.com/61                                                                                   
 http://poiemaweb.com/mongoose                                                            
 
 
 http://woowabros.github.io/woowabros/2017/09/12/realtime-service.html
+
+MongoDB 설치
+1. MongoDB 다운로드 (https://www.mongodb.org/download)                                        
+2. zip 파일 다운 후 압축을 풀고 디렉토리 이름을 mongodb 로 변경                                                                        
+3. c:\mongodb\data\db & c:\modgodb\log 디렉토리 생성                                                                                                                                  
+5. cmd 몽고 서버 시작 -> c:\mongodb\bin>mongod --dbpath c:\mongodb\data\db                                                            
+6. mongoDB 연결 -> c:\mongodb\bin>mongo                                                                 
+7. mongoDB 중지 -> db.shutdownServer()                                                  
+             
+ 
