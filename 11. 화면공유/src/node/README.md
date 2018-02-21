@@ -72,3 +72,16 @@ https://www.tutorialspoint.com/webrtc/webrtc_media_stream_apis.htm
 
 
 onicecandidate 는 언제 호출되냐...
+PC1---PC2가 모두 sdp가 세팅이 되면 호출된다.
+
+onnegotiationneeded 는 언제 호출될까?
+
+
+
+
+PC1 이 offer를 생성하면 그 offer를 setLocalDescription API를 이용해 자신에게 set!
+PC2 는 signal 서버를 통해 이 offer를 받고 setRemoteDescription API를 이용해 자신에게 set! 하고 answer를 만든다.
+만들어진 answer를 PC2는 setLocalDescription API를 이용해 set!
+PC1 은 signal 서버를 통해 answer를 받고 setRemoteDescription API를 이용해 set!
+
+getUserMedia 후에 불리는 addstream은 뭐하는거지?

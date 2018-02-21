@@ -13,6 +13,17 @@
 
     peer = new webkitRTCPeerConnection( configuration )
 
+// let the 'negotiationneeded' event trigger offer generation
+    peer.onnegotiationneeded = function () {
+        console.log("on negotiation called");
+    }
+
+    peer.onaddstream = function ( event ) {
+        console.log("going to add their stream...", event );
+        screen1.src = URL.createObjectURL( event.stream );
+	};
+
+
     startBtn.addEventListener( 'click', startHandler );
     endBtn.addEventListener( 'click', endHandler );
     window.addEventListener( 'capturedone', captureDoneHandler );
@@ -20,11 +31,13 @@
 
     socket.on( 'webrtc', function( message ) {
         message = JSON.parse( message );
-
+        console.log( 'message.cmdmessage.cmdmessage.cmd', message.cmd );
         if ( message.cmd === 'offer' ) {
             onOffer( message.data );
         } else if ( message.cmd === 'answer' ) {
             onAnswer( message.data );
+        } else if ( message.cmd === 'candidate' ) {
+            onCandidate( message.data )
         }
     })
 
@@ -54,13 +67,17 @@
 
             stream = result;
             screen1.src = window.URL.createObjectURL( stream );
-
-            ;
+            peer.addStream( stream )
+            
+            //peer = new webkitRTCPeerConnection( configuration );
 
             console.log( 'peer 만들어짐!', peer );
+            
 
             peer.createOffer(function( offerSdp ) {
                 console.log( 'offer', offerSdp )
+
+                peer.setLocalDescription( offerSdp )
 
                 let message = {
                     cmd: 'offer',
@@ -74,9 +91,21 @@
             })
 
 
-
+            peer.onaddstream = function( event ) {
+                console.log('onaddstreamonaddstreamonaddstream')
+            }
             peer.onicecandidate = function( event ) {
-                console.log( '!!!!!!!!!!!!!!!!!!!!!!!!!!!! 호출이냥' );
+                
+                if ( event.candidate ) {
+                    let message = {
+                        cmd: 'candidate',
+                        data: event.candidate
+                    }
+                    socket.emit( 'webrtc', JSON.stringify(message) );
+                }
+
+
+                console.log( '!!!!!!!!!!!!!!!!!!!!!!!!!!!! 호출이냥', event );
             }
             
         });
@@ -84,12 +113,19 @@
         // 이제 이 아이디값을 가지고 화면을 공유하면 되는데....
     }
 
+    function onCandidate( candidate ) {
+
+        peer.addIceCandidate( new RTCIceCandidate(candidate) );
+    }
+
     function onOffer( offerSdp ) {
-        peer.setRemoteDescription( new RTCSessionDescription(offerSdp) );
         console.log('In onOffer...', peer)
+        peer.setRemoteDescription( new RTCSessionDescription(offerSdp) );
         
         peer.createAnswer(function( answerSdp ) {
-            console.log('answerSdpzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', answerSdp)
+            
+            peer.setLocalDescription( answerSdp )
+
             let message = {
                 cmd: 'answer',
                 data: answerSdp
@@ -102,7 +138,9 @@
     }
 
     function onAnswer( answerSdp ) {
-        console.log( 'In onAnswer', answerSdp );
+        console.log( 'In onAnswer', peer );
+        //  Failed to set remote answer sdp
+       // peer.setLocalDescription( new RTCSessionDescription(answerSdp) );
         peer.setRemoteDescription( new RTCSessionDescription(answerSdp) );
     }
 

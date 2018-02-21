@@ -36,6 +36,7 @@ let io = socket.listen( server );
 let users = [];
 
 io.sockets.on( 'connection', function( socket ) {
+    console.log( 'socket connected', socket.id );
     users.push( socket.id );
 
     socket.on( 'webrtc', function( message ) {
@@ -45,6 +46,8 @@ io.sockets.on( 'connection', function( socket ) {
         if ( message.cmd === 'offer' ) {
             socket.broadcast.emit( 'webrtc', JSON.stringify(message) );
         } else if ( message.cmd === 'answer' ) {
+            socket.broadcast.emit( 'webrtc', JSON.stringify(message) );
+        } else if ( message.cmd === 'candidate' ) {
             socket.broadcast.emit( 'webrtc', JSON.stringify(message) );
         }
     })
