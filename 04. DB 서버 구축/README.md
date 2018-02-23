@@ -23,4 +23,6 @@ MongoDB 설치
 6. mongoDB 연결 -> c:\mongodb\bin>mongo                                                                 
 7. mongoDB 중지 -> db.shutdownServer()                                                  
              
+             
+ https://velopert.com/594
  

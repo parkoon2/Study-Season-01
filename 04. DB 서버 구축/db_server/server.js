@@ -6,7 +6,8 @@ const mongoose = require( 'mongoose' );
 app.use( bodyParser.urlencoded({ extended: true }) );
 app.use( bodyParser.json() );
 
-const router = require( './routes' )( app );
+const Chat = require('./models/chat');
+const router = require( './routes' )( app, Chat );
 const server = app.listen( 3000, function() {
 	console.log( 'server connection OK.' );
 });
