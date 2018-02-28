@@ -7,7 +7,7 @@ module.exports = function( app, Chat ) {
 	    })
 	});
 	/** 데이터 가져오기 */
-	app.get( '/api/chats/:chat_id', function( req, res ) {
+	/*app.get( '/api/chats/:chat_id', function( req, res ) {
 		Chat.findOne({_id: req.params.book_id}, function(err, chat){
 	        if(err) return res.status(500).json({error: err});
 	        if(!chat) return res.status(404).json({error: 'chat not found'});
@@ -20,9 +20,9 @@ module.exports = function( app, Chat ) {
 	        if( chats.length === 0 ) return res.status( 404 ).json({ error : 'chat not found' });
 	        res.json( chats );
 	    })
-    });
+    });*/
 	/** 생성 */
-	app.post( '/api/chats', function( req, res ) {
+	/*app.post( '/api/chats', function( req, res ) {
 		let chat = new Chat();
 		chat.chat_name = req.body.chat_name;
 		chat.chat_password = req.body.chat_password;
@@ -37,9 +37,9 @@ module.exports = function( app, Chat ) {
 	        res.json({ result : 1 });
 
 	    });
-    });
+    });*/
 	/** 수정 */
-	app.put( '/api/chats/:chat_id', function( req, res ) {
+	/*app.put( '/api/chats/:chat_id', function( req, res ) {*/
 		/** chat_id 를 찾아서 document를 수정*/
 		/*Chat.findById(req.params.chat_id, function(err, chat){
 	        if(err) return res.status(500).json({ error : 'database failure' });
@@ -55,21 +55,21 @@ module.exports = function( app, Chat ) {
 
 	    });*/
 		/** document 조회하지 않고 수정 */
-		Chat.update({ _id: req.params.chat_id }, { $set: req.body }, function(err, output){
+		/*Chat.update({ _id: req.params.chat_id }, { $set: req.body }, function(err, output){
 	        if(err) res.status(500).json({ error: 'database failure' });
 	        console.log(output); // output 은 mongod 에서 출력하는 결과물
 	        if(!output.n) return res.status(404).json({ error : 'chat not found' });
 	        res.json( { message : 'chat updated' } );
 	    })
-    });
+    });*/
 	/** 삭제 */
-	app.delete( '/api/chats/:chat_id', function( req, res ) {
+	/*app.delete( '/api/chats/:chat_id', function( req, res ) {
 		Chat.remove({ _id : req.params.chat_id }, function( err, output ) {
 			if(err) return res.status(500).json({ error: 'database failure' });
 
 			res.status(204).end();
 		})
-    });
+    });*/
 	
 
 

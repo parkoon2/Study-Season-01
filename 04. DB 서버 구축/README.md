@@ -25,4 +25,7 @@ MongoDB 설치
              
              
  https://velopert.com/594
+ https://github.com/velopert/mongoose_tutorial
  
+ 
+ https://www.youtube.com/watch?v=hrRue5Rt6Is

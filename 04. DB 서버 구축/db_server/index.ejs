@@ -6,6 +6,18 @@
     	<script type ="text/javascript" src="/socket.io/socket.io.js"></script>
 	</head>
 	<body>
-		<%=data%>
+		<div id = "chat">
+            <div id = "inner_chat">
+            <% for ( let message in messages ) { %>
+                <p><%= messages[message].name %> : <%= messages[message].message %></p>
+            <% } %>
+            </div>
+        </div>
+        <div id = "texting">
+            <form id = "form" action = "/text" method = "post">
+               <textarea id = "message" name = "message"></textarea>
+               <button>Send</button>
+            </form>
+        </div>
 	</body>
 </html>
