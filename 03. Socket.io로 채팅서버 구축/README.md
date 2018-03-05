@@ -8,7 +8,8 @@ http://poiemaweb.com/nodejs-socketio
 
 
 ----------------------------------------------------------------------------------------
-random_chat
+random_chat2 -> db 없는 채팅
+random_chat3 -> random_chat2 에서 mongodb 추가할 용
 
 .ds_store -> 해당파일이 왜 생성됬는지 알수없음, 쓸모없는 파일이라함 
 sts 로 커밋하니 생성됨 

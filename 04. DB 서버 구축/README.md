@@ -1,3 +1,5 @@
+mongochat 폴더는 수정용
+mongochat2 폴더는 유튜브 따라한거
 
 Nodejs 에서 mongodb 를 사용하면 좋다는데 이유는 모름.                          
 Mongoose 는  MongoDB 기반 ODM(Object Data Mapping) Node.JS 전용 라이브러리.                                                  
