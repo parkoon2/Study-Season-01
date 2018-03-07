@@ -50,9 +50,10 @@ client.on( 'connection', function() {
 		console.log("socket connect");
 		let chat = db.collection( 'chats' );
 		//status 를 보내는 함수 생성
-		sendStatus = function( s ) {
+		/*sendStatus = function( s ) {
 			socket.emit( 'status', s );
-		}
+		}*/
+		//limit( 100 ) : 보여주고싶은 데이터 갯수 제한(100개) 
 		chat.find().limit( 100 ).sort({ _id : 1 }).toArray( function( err, res ) {
 			if ( err ) {
 				throw err;

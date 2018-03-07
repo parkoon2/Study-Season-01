@@ -47,13 +47,15 @@
 				
 				//set default status
 				var statusDefault = status.textContent;
-				
+				console.log("statusDefault          ddd  ",statusDefault);
 				var setStatus = function( s ) {
 					//set status
 					status.textContext = s;
-					
+					console.log("html s",s);
+					console.log("html statusDefault",statusDefault);
 					if ( s !== statusDefault ) {
 						var delay = setTimeout( function() {
+							console.log("statusDefault",statusDefault);
 							setStatus( statusDefault );
 						}, 4000);
 					}

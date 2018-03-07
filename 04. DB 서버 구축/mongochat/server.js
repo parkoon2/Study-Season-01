@@ -10,8 +10,10 @@ db.on( 'open', function callback() {
 		let chat = db.collection( 'chats' );
 		//status 를 보내는 함수 생성
 		sendStatus = function( s ) {
+			console.log("s",s);
 			socket.emit( 'status', s );
 		}
+		console.log("sendStatus",sendStatus);
 		chat.find().limit( 100 ).sort({ _id : 1 }).toArray( function( err, res ) {
 			if ( err ) {
 				throw err;

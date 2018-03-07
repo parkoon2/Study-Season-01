@@ -7,7 +7,7 @@ $(document).ready(function() {
 	if( name.length > 0 ) {
 		$chat.css( "visibility", "visible" );
 		$text.css( "visibility" , "visible" );
-		socket.emit( "output", { name : name } );
+		socket.emit( "input", { name : name } );
 	};
 	const $sendButton = $( "#sendButton" );
 	const $message = $( "#message" );
@@ -20,8 +20,8 @@ $(document).ready(function() {
 	});
 	$message.keyup( function(e) {
 		if ( e.which == 13 ) {
-			console.log( "enter ok" );
 			let message = $message.val();
+			console.log( "enter ok", message );
 			socket.emit( "input", { message : message } );
 			$message.val("");
 			//return false;
@@ -36,10 +36,10 @@ $(document).ready(function() {
 		messages.textContent = '';
 	});
 	
-	const $inner_chat = $("#inner_chat");
-	socket.on( "input", function(data) {
-		console.log("data.name",data.name);
-		console.log("data.message",data.message);
-		$inner_chat.append("<p>" +data.name + ": " +data.message + " </p>");
+	const $inner_chat = $( '#inner_chat' );
+	socket.on( "input", function( data ) {
+		console.log( "data.name", data.name );
+		console.log( "data.message", data.message );
+		$inner_chat.append( '<p>' + data.name + ' : ' + data.message + ' </p> ' );
 	});
 });
