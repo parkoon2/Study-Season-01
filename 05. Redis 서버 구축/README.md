@@ -9,6 +9,9 @@ https://github.com/MicrosoftArchive/redis/releases 에서 redis(현재 버젼 3.
 cmd 창으로  C:\Program Files\Redis 로 들어간 후  "redis-server redis.windows.conf" 명령어를 치면 redis-server 가 실행되고
 클라이언트를 이용하여 서버로 접근을 해보려면 서버가 실행되고 있는 상태에서 redis-cli.exe 파일을 실행하면 된다.
 
+** 만약 redis-server redis.windows.conf 를 친 상태에서 creating server tcp listening socket 127.0.0.1:6379 가 나오면 
+redis-cli.exe 실행 후  shutdown 하고 exit 로 나간뒤 다시 redis-server redis.windows.conf 를 치면 됨
+
 참고 : http://hwigyeom.ntils.com/entry/Windows-%EC%97%90-Redis-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0-1 ,     
 http://blog.naver.com/musasin84/60191253455
 
@@ -19,3 +22,9 @@ redis 모듈 설치
  npm install redis
  
  참조 : http://blog.naver.com/musasin84/60191181598
+ 
+ 
+ 
+
+https://github.com/mudchobo/nodejs-socketio_redis_store 참고
+ 
