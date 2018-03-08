@@ -2,7 +2,12 @@
 	margin: 0px auto;
 	padding: 0px;
 }
-
+#user_name {
+	margin-top: 20px;
+	text-align: center;
+	width: 33.2%;
+	height: 4em;
+}
 #chat {
 	width: 400px;
 	height: 400px;

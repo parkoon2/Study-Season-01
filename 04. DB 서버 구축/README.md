@@ -31,3 +31,20 @@ MongoDB 설치
  
  
  https://www.youtube.com/watch?v=hrRue5Rt6Is
+ 
+ 
+ ssl_socket_mongo 폴더의 2 가지 문제                                                                                                                                         
+ 1. 새로고침할때마다 채팅창에 써있는 채팅들이 한개씩 더생김 ex) a: aa, a:bb 라고 적혀있을 때 새로 고침하면 a: aa, a:bb, a: aa, a:bb 이렇게 됨
+ server.js 안의 console.log("socket connect"); 도 위처럼 새로고침하면 두배씩 늘어나는거보면 ..                                  
+ 계속 소켓이 연결되나??? 해결방법모르겠음                                                                                                                 
+ 2. ssl 로 https 로 연결하고싶은데 연결이 비공개로 설정되어 있지 않습니다 뜨고 내가 만든 화면이 나오지 않음 이건 찾아보면 있을거같은데 나중에....
+ 
+ 
+ mongodb 데이터베이스 리스트 확인 
+ -> show dbs
+ mongodb 에서 collection 리스트 찾기 
+ -> db.chats.find()
+ mongodb collection 리스트 지우기 
+ -> db.chats.drop()
+ 
+ 

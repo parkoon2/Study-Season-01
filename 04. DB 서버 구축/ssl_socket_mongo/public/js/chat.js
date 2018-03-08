@@ -1,30 +1,30 @@
 $(document).ready(function() {
 	const socket = io.connect();
-	const name = prompt( "What is your name?" );
-	console.log( "name", name );
-	const $chat = $( "#chat" );
-	const $text = $( "#text" );
-	if( name.length > 0 ) {
-		$chat.css( "visibility", "visible" );
-		$text.css( "visibility" , "visible" );
-		socket.emit( "input", { name : name } );
-	};
-	const $sendButton = $( "#sendButton" );
-	const $message = $( "#message" );
+	
+	const $inner_chat = $( '#inner_chat' );
+	socket.on( 'data_send', function( data ) {
+		if ( data.length ) {
+			for ( let x = 0; x < data.length; x ++ ) {
+				$inner_chat.append( '<p>' + data[x].name + ' : ' + data[x].message + ' </p> ' );
+			}
+		}
+	});
+	
+	const $name = $( '#name' );
+	const $sendButton = $( '#sendButton' );
+	const $message = $( '#message' );
 	$sendButton.click( function() {
+		let name = $name.val();
 		let message = $message.val();
-		console.log( "button click ok", message );
-		socket.emit( "output", { message : message } );
-		$message.val("");
-		//return false;
+		socket.emit( 'input', { name : name , message : message } );
+		$message.val('');
 	});
 	$message.keyup( function(e) {
 		if ( e.which == 13 ) {
+			let name = $name.val();
 			let message = $message.val();
-			console.log( "enter ok", message );
-			socket.emit( "input", { message : message } );
-			$message.val("");
-			//return false;
+			socket.emit( 'input', { name : name , message : message } );
+			$message.val('');
 		}
 	});
 	
@@ -32,14 +32,8 @@ $(document).ready(function() {
 	$clearButton.click( function() {
 		socket.emit( 'clear' );
 	});
-	socket.on( 'cleared', function() {
-		messages.textContent = '';
+	socket.on( 'cleared', function( data ) {
+		$inner_chat.empty();
 	});
 	
-	const $inner_chat = $( '#inner_chat' );
-	socket.on( "input", function( data ) {
-		console.log( "data.name", data.name );
-		console.log( "data.message", data.message );
-		$inner_chat.append( '<p>' + data.name + ' : ' + data.message + ' </p> ' );
-	});
 });

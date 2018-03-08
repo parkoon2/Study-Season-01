@@ -8,6 +8,11 @@
     	<script type ="text/javascript" src="/js/chat.js"></script>
 	</head>
 	<body>
+	 	<div id = "user_name">
+	 		<form id = "form" action = "/text" method = "post">
+              <input type="text" id="name" name="name" />
+            </form>
+	 	</div>
         <div id = "chat">
             <div id = "inner_chat">
             <% for ( let message in messages ) { %>
