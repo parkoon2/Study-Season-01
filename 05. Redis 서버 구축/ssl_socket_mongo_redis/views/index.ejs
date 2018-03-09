@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Chat</title>
+		 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link rel = "stylesheet" type = "text/css" href = "/css/style.css">
+    	<script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    	<script type ="text/javascript" src="/js/chat.js"></script>
+	</head>
+	<body>
+	 	<div id = "user_name">
+	 		<form id = "form" action = "/text" method = "post">
+              <input type="text" id="name" name="name" />
+            </form>
+	 	</div>
+        <div id = "chat">
+            <div id = "inner_chat">
+            <% for ( let message in messages ) { %>
+                <p><%= messages[message].name %> : <%= messages[message].message %></p>
+            <% } %>
+            </div>
+        </div>
+        <div id = "texting">
+            <form id = "form" action = "/text" method = "post">
+               <textarea id = "message" name = "message"></textarea>
+               <button id = 'sendButton'>Send</button>
+               <button id = 'clearButton'>Clear</button>
+            </form>
+        </div>
+	</body>
+</html>

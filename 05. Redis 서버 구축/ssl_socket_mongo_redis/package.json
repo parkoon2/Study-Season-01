@@ -1,0 +1,21 @@
+{
+  "name": "ssl_socket_mongo_redis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "https": "^1.0.0",
+    "mongoose": "^5.0.9",
+    "path": "^0.12.7",
+    "redis": "^2.8.0"
+  }
+}
