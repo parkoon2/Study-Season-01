@@ -25,7 +25,6 @@ let emitMessages = function(room, socket){
 		messages = messages.reverse();
 		messages.forEach(function(message) {
 			socket.emit("displayMessage", message); // 이곳의 메시지는 이미 저장되어 있는 메시지
-			
 		});
 	});
 }

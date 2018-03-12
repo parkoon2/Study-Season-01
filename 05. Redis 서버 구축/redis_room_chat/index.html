@@ -13,11 +13,11 @@ $(document).ready(function() {
 	const socket = io.connect();
 	
 	socket.on("displayMessage", function (data) {
-		var num = $(".message_box").children("p").length;
+		let num = $(".message_box").children("p").length;
 		console.log("num",num); // 무조건 10?
-		var messageString = "<p>"+data+"</p>";
+		let messageString = "<p>"+data+"</p>";
 		console.log("data",data); // submit 버튼 클릭시 현재 메시지
-		if (num >= 10) { $(".message_box").children("p:first").remove();}
+		if ( num >= 10 ) { $(".message_box").children("p:first").remove();}
 		$(".message_box").append(messageString);
 	});
 	
@@ -27,7 +27,7 @@ $(document).ready(function() {
 	
 	$(".submit_button").click(function(e){
 		e.preventDefault();
-		var message = $(".message_input").val();
+		let message = $(".message_input").val();
 		if (message != "") socket.emit("chatMessage", [room, message]);
 		$(".message_input").val("");
 	});
