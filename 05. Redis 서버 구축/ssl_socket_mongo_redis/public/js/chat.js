@@ -14,9 +14,8 @@ $(document).ready(function() {
 	const $sendButton = $( '#sendButton' );
 	const $message = $( '#message' );
 	$sendButton.click( function() {
-		let name = $name.val();
 		let message = $message.val();
-		socket.emit( 'input', { name : name , message : message } );
+		socket.emit( 'input', { message : message } );
 		$message.val('');
 	});
 	$message.keyup( function(e) {

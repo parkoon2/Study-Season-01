@@ -16,8 +16,8 @@ const options = {
 app.use( express.static( path.join( __dirname, './public' ) ) );
 
 let messages = [];
-let name;
-const message = redis.createClient();
+let message;
+const user_name = redis.createClient();
 
 app.set( 'views', path.join( __dirname, './views' ) );
 app.set( 'view engine', 'ejs' );
@@ -51,7 +51,7 @@ client.on( 'connection', function() {
 		});
 
 		socket.on( 'input', function( data ) {
-			chat.insert({ name : data.name }, function() {
+			chat.insert({ message : data.message }, function() {
 				client.emit( 'data_send', [ data ] );
 			});
 		});
