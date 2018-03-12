@@ -21,7 +21,7 @@ let storeMessage = function(room, message) {
 
 let emitMessages = function(room, socket){
 	client.lrange(room, 0, -1, function(err, messages){
-		//reverse() 는 배열을 반전 시키는 메소드
+		//reverse() 는 배열을 반전 시키는 메소드 (역순배열)
 		messages = messages.reverse();
 		messages.forEach(function(message) {
 			socket.emit("displayMessage", message); // 이곳의 메시지는 이미 저장되어 있는 메시지
