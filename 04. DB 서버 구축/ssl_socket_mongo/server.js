@@ -37,7 +37,6 @@ const server = app.listen( 3000, function() {
 
 const client = require( 'socket.io' ).listen( server ).sockets;
 
-client.on( 'connection', function() {
 	
 	client.on( 'connection', function( socket ) {
 		console.log("socket connect");
@@ -63,5 +62,5 @@ client.on( 'connection', function() {
 			});
 		});
 	});
-});
+
 

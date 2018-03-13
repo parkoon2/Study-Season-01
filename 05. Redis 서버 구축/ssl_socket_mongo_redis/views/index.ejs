@@ -8,20 +8,27 @@
     	<script type ="text/javascript" src="/js/chat.js"></script>
 	</head>
 	<body>
+		<div class="rooms">
+	      <form>
+	          <input class="roomButton" data-room="room_one" type="submit" value="Room 1" />
+	          <input class="roomButton" data-room="room_two" type="submit" value="Room 2" />
+	          <input class="roomButton" data-room="room_three" type="submit" value="Room 3" />
+	          <input class="roomButton" data-room="room_four" type="submit" value="Room 4" />
+	          <input class="roomButton" data-room="room_five" type="submit" value="Room 5" />
+	      </form>
+	    </div>
 	 	<div id = "user_name">
-	 		<form id = "form" action = "/text" method = "post">
+	 		<form id = "form">
               <input type="text" id="name" name="name" />
             </form>
 	 	</div>
         <div id = "chat">
             <div id = "inner_chat">
-            <% for ( let message in messages ) { %>
-                <p><%= messages[message].name %> : <%= messages[message].message %></p>
-            <% } %>
+               <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
             </div>
         </div>
         <div id = "texting">
-            <form id = "form" action = "/text" method = "post">
+            <form id = "form" >
                <textarea id = "message" name = "message"></textarea>
                <button id = 'sendButton'>Send</button>
                <button id = 'clearButton'>Clear</button>

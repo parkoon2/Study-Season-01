@@ -17,6 +17,7 @@ $(document).ready(function() {
 		let name = $name.val();
 		let message = $message.val();
 		socket.emit( 'input', { name : name , message : message } );
+		console.log("name",name);
 		$message.val('');
 	});
 	$message.keyup( function(e) {
@@ -28,7 +29,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	const $clearButton = $( "#clearButton" );
+	const $clearButton = $( '#clearButton' );
 	$clearButton.click( function() {
 		socket.emit( 'clear' );
 	});

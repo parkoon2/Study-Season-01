@@ -33,10 +33,11 @@ $(document).ready(function() {
 	});
 	
 	$(".room_button").click(function(e){
+		
 		e.preventDefault();
-		var old_room = room;
+		let old_room = room;
 		window.room = $(this).data("room");
-		var join_event = "join_"+room;
+		let join_event = "join_"+room;
 		socket.emit(join_event, [old_room, room]);
 	});
 	
