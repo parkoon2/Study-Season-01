@@ -53,7 +53,7 @@ $(document).ready(function() {
 	});
 	
 	socket.on( 'cleared', function( data ) {
-		$inner_chat.empty();
+		//$inner_chat.empty();
 	});
 	
 });

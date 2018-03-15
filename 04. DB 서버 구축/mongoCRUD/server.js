@@ -51,9 +51,9 @@ const client = require( 'socket.io' ).listen( server ).sockets;
 		socket.on( 'sendMessage', function( data ) {
 		//	name = socket._id;
 		//	message = data;
-			chatUser.insert( { name : data.name, message : data.message }, function() {
-				client.emit( 'data_send', [ data ] );
-				console.log('data',data);
+			chatUser.create( { name : data.name, message : data.message }, function( err, chatuser ) {
+				client.emit( 'data_send', chatuser );
+				console.log('chatuser',chatuser);
 			});
 			
 			
@@ -74,9 +74,17 @@ const client = require( 'socket.io' ).listen( server ).sockets;
 			});
 		});
 		
-		socket.on( 'findOnemessage',function(data){
-			console.log("find",data);
-			chatUser.delete( {}, function( err, chatuser ) {
+		socket.on( 'findonemessage',function(data){
+			console.log("findone",data);
+			chatUser.find( {}, function( err, chatuser ) {
+				client.emit( 'find', chatuser );
+				console.log('chatuser', chatuser);
+			});
+		});
+		
+		socket.on( 'deleteOnemessage',function(data){
+			console.log("deleteOnemessage",data);
+			chatUser.findByIdAndRemove( {}, function( err, chatuser ) {
 				client.emit( 'find', chatuser );
 				console.log('chatuser', chatuser);
 			});
