@@ -42,10 +42,16 @@ MongoDB 설치
  4. 버튼클릭하면 페이지 새로고침됨  -> e.preventDefault(); 로 이벤트를 막으면 해결 될 거 같음! 아직 안해봄
  
  mongodb 데이터베이스 리스트 확인 
- -> show dbs
+ -> show dbs  
+ show collections 로 데이터베이스 콜렉션 찾기
+ 데이터베이스 리스트 확인 하고 사용?
+ -> use 데이터베이스이름 ex) use mongochat
  mongodb 에서 collection 리스트 찾기 
  -> db.chats.find()
  mongodb collection 리스트 지우기 
  -> db.chats.drop()
  
  
+ https://github.com/manki11/Chat.io
+ 참고하여 mongoCRUD 폴더에 mongoose crud 사용하기
+ https://medium.com/@feedbots/node-js-%EB%A1%9C-crud-%EB%A7%8C%EB%93%A4%EC%96%B4-%EB%B3%B4%EA%B8%B0-cdcbaf7174a7
