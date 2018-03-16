@@ -27,12 +27,12 @@ app.get( '/', function( req, res ) {
  res.render( 'index', { messages : messages } );
 });
 
-/*const server = https.createServer(options, app).listen(3000, function() {
+const server = https.createServer(options, app).listen(3000, function() {
   console.log("HTTPS server listening on port " + 3000);
-});*/
-const server = app.listen( 3000, function() {
-	console.log( "listening on port 3000" );
 });
+/*const server = app.listen( 3000, function() {
+	console.log( "listening on port 3000" );
+});*/
 
 
 const client = require( 'socket.io' ).listen( server ).sockets;

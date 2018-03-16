@@ -20,7 +20,7 @@ app.get( '/', function( req, res ) {
 	res.render( 'index' );
 });
 
-clientRoom.on( 'error', function( err ) { console.log("Error " + err ); } );
+clientRoom.on( 'error', function( err ) { console.log( 'Error ' + err ); } );
 
 const server = app.listen( 3000, function() {
 	console.log( 'listening on port 3000' );
@@ -29,26 +29,19 @@ const server = app.listen( 3000, function() {
 const client = require( 'socket.io' ).listen( server ).sockets;
 
 
-let storeMessage = function( room, message ) {
-	console.log("room!!!",room); // submit 버튼으로 클릭시 현재 방 번호
-	console.log("message!!!",message); //submit 버튼으로 클릭시 현재 쓴 메시지
+let storeMessage = function( room, message ) { // submit 버튼으로 클릭시 현재 방 번호와 메시지
 	/** .lpush -> 문자열 배열을 redis queue 에 넣음*/
-	clientRoom.lpush( room, message, function ( err, res ) {
+	clientRoom.lpush( room, function ( err, res ) {
 		// room 목록이 0 번째 ~ 9 번째까지만 남겨놈
-		clientRoom.ltrim( room, 0, 17 );
+		clientRoom.ltrim( room, 0, 9 );
 	});
-	client.in( room ).emit( 'displayMessage', message );
+	//client.in( room ).emit( 'displayMessage', message );
 }
 
 let emitMessages = function( room, socket ) {
-	console.log( 'room ???????? ', room );
+
 	clientRoom.lrange( room, 0, -1, function ( err, messages ) {
-		//reverse() 는 배열을 반전 시키는 메소드 (역순배열)
-		//messages = messages.reverse();
-		messages.forEach(function(message) {
-			socket.emit("displayMessage", message); // 이곳의 메시지는 이미 저장되어 있는 메시지
-			console.log("message ????? ",message);
-		});
+		messages = messages.reverse();
 	});
 }
 
@@ -56,14 +49,24 @@ let emitMessages = function( room, socket ) {
 client.on( 'connection', function( socket ) {
 	console.log( 'connect' );
 	let chat = db.collection( 'chats' );
-	socket.join( 'room_one' );
 	
+	socket.join( 'room_one' );
 	emitMessages( 'room_one', socket );
 	
+	chat.find().limit( 100 ).sort({ _id : 1 }).toArray( function( err, res ) {
+		if ( err ) {
+			throw err;
+		}
+		socket.emit( 'displayChat', res );
+	});
+	socket.on( 'inputName', function( data ) {
+		chat.insert({ name : data.name, message : data.message }, function() {
+			client.emit( 'displayChat', [ data ] );
+		});
+	});
+	
 	socket.on( 'chatMessage', function( data ) {
-	  storeMessage( data[0], data[1] );
-	  console.log( 'data[0]', data[0] ); //submit 버튼 클릭시 현재 방번호
-	  console.log( 'data[1]', data[1] ); //submit 버튼 클릭시 현재 적힌 메시지
+		storeMessage( data[0], data[1] ); // submit 버튼 클릭시 현재 방번호, 현재 적힌 메시지
 	});
 	
 	for ( let i = 0; i < rooms.length; i++ ) {

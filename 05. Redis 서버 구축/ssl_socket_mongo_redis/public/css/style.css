@@ -18,6 +18,7 @@
 	height: 400px;
 	border: 1px solid black;
 	visibility: none;
+	overflow:auto;
 }
 
 #texting {
@@ -26,6 +27,9 @@
 	border: 1px solid black;
 	visibility: visible;
 	text-align: center;
+}
+p {
+	height : 3px;
 }
 textarea{
 	margin-top: 20px;

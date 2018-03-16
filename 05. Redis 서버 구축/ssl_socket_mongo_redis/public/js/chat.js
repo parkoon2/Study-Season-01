@@ -4,12 +4,18 @@ $( document ).ready( function() {
 	const socket = io.connect();
 	
 	const $inner_chat = $( '#inner_chat' );
+	socket.on( 'displayChat', function ( data ) {
+		
+		if ( data.length ) {
+			for ( let x = 0; x < data.length; x ++ ) {
+				$inner_chat.append( '<p>' + data[x].name + '님의 말씀 : ' + '</p></br>');
+				$inner_chat.append( '<p>' + data[x].message + '</p></br>');
+			}
+		}
+	});
+	
 	socket.on( 'displayMessage', function ( data ) {
-		let num = $inner_chat.children( 'p' ).length; //무조건 10?? index.ejs 에 박혀있음
-		console.log(num);
-		let messageString = '<p>' + data + '</p>';
-		console.log( 'data', data); // submit 버튼 클릭시 현재 메시지
-		if ( num >= 18 ) { $inner_chat.children( 'p:first' ).remove(); }
+		let messageString = '<p>' + data + '</p></br>';
 		$inner_chat.append( messageString );
 	});
 	
@@ -18,11 +24,23 @@ $( document ).ready( function() {
 	});
 	
 	const $sendButton = $( '#sendButton' );
+	const $name = $( '#name' );
 	$sendButton.click( function( e ) {
 		e.preventDefault();
+		let name = $name.val();
 		let message = $( '#message' ).val();
-		if ( message != '' ) socket.emit( "chatMessage", [ room, message ] );
-		$( '#message' ).val('');
+		if( name != '' ){
+			if ( message != '' ) {
+				socket.emit( 'inputName', { name : name, message : message } );
+				socket.emit( "chatMessage", [ room, message ] );	
+			}else{
+				alert( '메시지를 적어주세요' );
+			}
+			$( '#message' ).val('');
+		}else{
+			alert( '이름적어주세요' );
+		}
+		
 	});
 	
 	const $roomButton = $( '.roomButton' );
@@ -34,6 +52,7 @@ $( document ).ready( function() {
 		if( old_room !== window.room ) {
 			socket.emit( join_event, [ old_room, room ] );
 		} else {
+			console.log("aaa");
 			e.preventDefault();
 		}
 	});
