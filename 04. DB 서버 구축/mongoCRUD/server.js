@@ -35,14 +35,7 @@ app.get('/get', function( req, res ) {
 
 });
 
-app.get( '/oneget', function( req, res ) {
-	let name = req.body.name;
-	chatUser.findOne(name, function( doc ) {
-		
-    });
-});
-
-app.post( '/insert', function(req, res ) {
+app.post( '/insert', function( req, res ) {
 	let item = {
 			name : req.body.name,
 			message : req.body.message
@@ -52,10 +45,10 @@ app.post( '/insert', function(req, res ) {
 	res.redirect( '/' );
 });
 
-app.post( '/update', function(req, res ) {
+app.post( '/update', function( req, res ) {
 	let id = req.body.id;
-	chatUser.findById(id, function(err, doc){
-		if(err){
+	chatUser.findById( id, function( err, doc ){
+		if( err ){
 			console.log('error found while updating');
 		}
 		doc.name = req.body.name;
@@ -71,9 +64,9 @@ app.post( '/id_delete', function( req, res ) {
 	res.redirect( '/' );
 });
 
-app.post( '/delete', function(req, res ) {
-	chatUser.remove( {}, function( doc ) {
-		res.send( doc );
+app.post( '/delete', function( req, res ) {
+	chatUser.remove( {}, function( ) {
+		res.send( 'success delete' );
 	});
 });
 
