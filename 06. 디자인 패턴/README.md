@@ -19,12 +19,20 @@ module pattern : 네임스페이스 패턴 처럼 전역 스페이스를 더럽�
 3. 함수 접근 제한                             
 4. 네임스페이스 이용            
 
+( 참고 : http://poiemaweb.com/js-closure , http://webclub.tistory.com/78?category=501048 , http://ssben.tistory.com/18 ) 
+https://kkd927.github.io/general/web/javascript/2017/04/12/4-JavaScript-Design-Patterns-You-Should-Know.html
 ====================================================================================================
              
+ singleton pattern :                                    
+ 1. 클래스 함수의 인스턴스를 한 개만 유지                                           
+ 2. 즉, 여러 객체를 생성하더라도 최초 생성된 객체를 사용하는 것                                          
+ 3. 객체에 대한 접근자 (비공개 멤버 : 클로저)를 사용하여 해당 객체를 공유하는 것        
+ 
+ http://webclub.tistory.com/150 , http://niceman.tistory.com/30 , 
  
 
 
 
 
-( 참고 : http://poiemaweb.com/js-closure , http://webclub.tistory.com/78?category=501048 , http://ssben.tistory.com/18 )     
+    
 
