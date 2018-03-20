@@ -25,8 +25,8 @@ app.post( '/insert', function( req, res ) {
 	});
 });
 app.get( '/get', function( req, res ) {
-	client.lrange( 'req.body.message', 0 ,-1 );
-	console.log(req.body.message)
+	client.lrange( 'message', 0 ,-1 );
+	console.log(req.body.message);
 });
 app.post( '/delete', function( req, res ) {
 	client.del( 'message', function( err, result ) {
