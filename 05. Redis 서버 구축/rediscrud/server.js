@@ -19,16 +19,14 @@ app.get( '/', function( req, res ) {
 });
 
 app.post( '/insert', function( req, res ) {
-	client.set( 'message', req.body.message , function( err, result ) {
+	client.lpush( 'message', req.body.message , function( err, result ) {
 		if ( err ) res.send( 'error : ' + err );
 		else console.log( 'message : ' + result );
 	});
 });
 app.get( '/get', function( req, res ) {
-	client.hmget( 'message', function( err, result ) {
-		if ( err ) console.log( 'Error: '+ err );
-	    else res.send( result );
-	});
+	client.lrange( 'req.body.message', 0 ,-1 );
+	console.log(req.body.message)
 });
 app.post( '/delete', function( req, res ) {
 	client.del( 'message', function( err, result ) {
