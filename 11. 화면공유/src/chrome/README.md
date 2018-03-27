@@ -60,3 +60,6 @@ background.js
     이 곳에 데이터를 넣어서 전달해준다.
   
   2. window.dispatchEvent(위에서 만든 이벤트 객체) 를 이용해 이벤트를 발생시킨다 (dispatch는 `보내다` 라는 의미...)
+  
+##   node event emitter and listener
+http://avilos.codes/server/nodejs/nodejs%EC%9D%98-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%9D%B4%EB%AF%B8%ED%84%B0%EC%99%80-%EB%A6%AC%EC%8A%A4%EB%84%88/
