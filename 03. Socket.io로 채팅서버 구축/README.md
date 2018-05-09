@@ -13,7 +13,7 @@ random_chat3 -> random_chat2 에서 mongodb 추가할 용
 
 .ds_store -> 해당파일이 왜 생성됬는지 알수없음, 쓸모없는 파일이라함 
 sts 로 커밋하니 생성됨 
-찾아보니 (Desktop Services Store) 인데 apple mac os 와 관련있다함 난 window 
+찾아보니 (Desktop Services Store) 인데 apple mac os 와 관련있다함 난 window 인데.. 
 
 git push 명령 후 [rejected] non-fast forward 대충 이런 에러메시지를 받는 경우  
 원인은 현재 작업하는 repository가 깃 서버에 있는 repository 보다 오래된 내용일 경우  
